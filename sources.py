@@ -1,5 +1,4 @@
 import requests
-from requests.models import Response
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -34,7 +33,7 @@ def deaths(country):
 
 # Pega o numero total de mortes acumuladas no mundo no dia de hoje
 def newDeaths():
-  res = getSummaryData().json()
+  res = getSummaryData()
   return res['Global']['NewDeaths']
 
 # Pega o numero total de casos ativos no Brazil
@@ -52,7 +51,7 @@ def active(country):
 
 # Pega o nome do pais com maior numero de casos confirmados acumuladas
 def countryWithMostCases():
-  res = getSummaryData().json()
+  res = getSummaryData()
   champion = ''
   deaths   = 0
   for country in res['Countries']:
@@ -63,7 +62,7 @@ def countryWithMostCases():
 
 # Pega o nome do pais com maior numero de mortes acumuladas
 def countryWithMostDeaths():
-  res = getSummaryData().json()
+  res = getSummaryData()
   champion = ''
   deaths   = 0
   for country in res['Countries']:
@@ -79,15 +78,25 @@ def getSummaryData():
   response = requests.request("GET", URI, verify=False)
 
   if(response.status_code == 200):
-    return response
+    return response.json()
   return 'Erro ao acessar a API'
 
 # Coleta dados da API de Summary para um pais
 def getSummaryDataFor(country):
   country  = country.capitalize() 
-  res = getSummaryData().json()
+  res = getSummaryData()
   for c in res['Countries']:
     if(c['Country'] == country):
       return c
 
   return 'Erro ao acessar a API'
+
+
+# Coleta todos os paises
+def getCountries():
+  URI = URL + 'countries'
+  response = requests.request("GET", URI, verify=False)
+  if(response.status_code == 200):
+    return response.json()
+  return 'Erro ao acessar a API'
+  
