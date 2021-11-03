@@ -1,1 +1,1 @@
-# Chatbot Quiz about COVID-19
+# Chatbot que faz Quiz sobre COVID-19
