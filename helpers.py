@@ -13,7 +13,6 @@ load_dotenv()
 def send(message):
   print(message)
 
-
 def get(user ='', validation=False, message=''):
   if(validation):
     send(message)
@@ -31,13 +30,14 @@ def get(user ='', validation=False, message=''):
   else: 
     return input('Digite: ')
 
-
 def options():
   return {
     "begin" : 65,
     "end"   : 65+int(os.getenv('OPTIONS'))
   } 
 
+def getToken():
+  return str(os.getenv('TOKEN'))
 
 def shuffleAndReturn(questions):
   random.shuffle(questions)

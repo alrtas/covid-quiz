@@ -1,12 +1,11 @@
 from flask import Flask
 import quiz
 import helpers as hlp
+
 app = Flask(__name__)
 
 
-
-if __name__ == '__main__':
-  
+def main() -> None:
   hlp.send('Ola, seja bem vindo ao Quiz da COVID-19')
   hlp.send('Vamos comecar, digite o seu primeiro nome')
   user = hlp.get()
@@ -33,9 +32,13 @@ if __name__ == '__main__':
   hlp.send('\nCalculando o seu resultado...')
 
   correct = 0
-  total   = len(questions)
   for object in questions:
     if(object['correct'] == True):
       correct += 1
 
   hlp.send(f'\nVoce acertou {correct} de {len(questions)} totalizando uma nota de: {(correct/len(questions))*10} ')
+
+
+if __name__ == '__main__':
+  main()
+ 
